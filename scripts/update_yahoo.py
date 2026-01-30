@@ -16,8 +16,8 @@ def get_historical_prices(coin_id, days=60):
     return data["prices"]
 
 # Récupérer BTC et ETH
-btc_data = get_historical_prices("bitcoin", 60)
-eth_data = get_historical_prices("ethereum", 60)
+btc_data = get_historical_prices("bitcoin", 3600)
+eth_data = get_historical_prices("ethereum", 3600)
 
 # Créer DataFrame
 df = pd.DataFrame({
@@ -56,7 +56,7 @@ days_to_predict = 30
 
 def predict_next_days(series, n_days):
    
-    trend = series.diff().tail(50).mean()
+    trend = series.diff().tail(3000).mean()
     last_value = series.iloc[-1]
     predictions = []
     for i in range(n_days):
