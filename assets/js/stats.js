@@ -29,6 +29,10 @@ function buildPlots(rows) {
 function buildTable(rows) {
   const tbody = document.querySelector("#cryptoTable tbody");
 
+  // Vider le tbody avant de reconstruire
+  tbody.innerHTML = "";
+
+  // Ajouter les lignes
   rows.slice().reverse().forEach(r => {
     tbody.innerHTML += `
       <tr>
@@ -41,17 +45,17 @@ function buildTable(rows) {
     `;
   });
 
+  // Détruire la DataTable existante si elle existe
+  if ($.fn.DataTable.isDataTable("#cryptoTable")) {
+    $("#cryptoTable").DataTable().clear().destroy();
+  }
+
+  // Créer la DataTable
   new DataTable("#cryptoTable", {
     pageLength: 25,
     order: [[0, "desc"]]
   });
 }
-
-(async function main() {
-  const rows = await loadData();
-  buildPlots(rows);
-  buildTable(rows);
-})();
 
 async function buildPredictions() {
   const res = await fetch("data/predictions.json");
@@ -67,10 +71,12 @@ async function buildPredictions() {
   ], { title: "Prédictions BTC & ETH" });
 }
 
+// -------------------------
+// Main : ne l'appelle qu'une seule fois
+// -------------------------
 (async function main() {
   const rows = await loadData();
   buildPlots(rows);
   buildTable(rows);
-  buildPredictions(); 
+  buildPredictions();
 })();
-
