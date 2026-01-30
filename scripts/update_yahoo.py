@@ -3,7 +3,7 @@ import pandas as pd
 from datetime import datetime
 import json
 
-def get_historical_prices(coin_id, days=3600):
+def get_historical_prices(coin_id, days=360):
     url = f"https://api.coingecko.com/api/v3/coins/{coin_id}/market_chart"
     params = {
         "vs_currency": "usd",
@@ -16,8 +16,8 @@ def get_historical_prices(coin_id, days=3600):
     return data["prices"]
 
 # Récupérer BTC et ETH
-btc_data = get_historical_prices("bitcoin", 3600)
-eth_data = get_historical_prices("ethereum", 3600)
+btc_data = get_historical_prices("bitcoin", 360)
+eth_data = get_historical_prices("ethereum", 360)
 
 # Créer DataFrame
 df = pd.DataFrame({
@@ -56,7 +56,7 @@ days_to_predict = 30
 
 def predict_next_days(series, n_days):
    
-    trend = series.diff().tail(3000).mean()
+    trend = series.diff().tail(300).mean()
     last_value = series.iloc[-1]
     predictions = []
     for i in range(n_days):
