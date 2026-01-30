@@ -53,7 +53,7 @@ function buildTable(rows, tableId = "#cryptoTable") {
 }
 
 async function buildPredictions() {
-  const res = await fetch("data/predictions.json");
+  const res = await fetch("data/predictions.json?t=" + new Date().getTime());
   const rows = await res.json();
 
   const dates = rows.map(r => r.date);
