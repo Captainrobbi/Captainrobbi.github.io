@@ -46,3 +46,44 @@ with open("data/table.json", "w") as f:
     json.dump(records, f, indent=2)
 
 print("✅ prices.json et table.json mis à jour !")
+
+
+from datetime import datetime, timedelta
+
+
+# Prédictions:
+days_to_predict = 10
+
+def predict_next_days(series, n_days):
+    # prend les 5 derniers jours pour calculer la tendance moyenne
+    trend = series.diff().tail(5).mean()
+    last_value = series.iloc[-1]
+    predictions = []
+    for i in range(n_days):
+        last_value += trend
+        predictions.append(round(last_value, 2))
+    return predictions
+
+
+# Générer les dates futures
+last_date = datetime.strptime(df['Date'].iloc[-1], "%Y-%m-%d")
+future_dates = [(last_date + timedelta(days=i+1)).strftime("%Y-%m-%d") for i in range(days_to_predict)]
+
+
+btc_pred = predict_next_days(df['BTC'], days_to_predict)
+eth_pred = predict_next_days(df['ETH'], days_to_predict)
+
+
+predictions = []
+for i in range(days_to_predict):
+    predictions.append({
+        "date": future_dates[i],
+        "btc_pred": btc_pred[i],
+        "eth_pred": eth_pred[i]
+    })
+
+
+with open("data/predictions.json", "w") as f:
+    json.dump(predictions, f, indent=2)
+
+print("✅ predictions.json créé avec", days_to_predict, "jours de prédiction !")
