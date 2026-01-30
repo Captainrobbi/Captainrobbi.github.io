@@ -1,44 +1,48 @@
-import json
-from datetime import datetime
+import requests
 import pandas as pd
-import yfinance as yf
+from datetime import datetime
+import json
 
-TICKERS = {
-    "btc": "BTC-USD",
-    "eth": "ETH-USD"
-}
-
-def download(ticker: str, period="180d", interval="1d"):
-    df = yf.download(ticker, period=period, interval=interval, progress=False)
-    df = df.reset_index()
-    df["Date"] = pd.to_datetime(df["Date"]).dt.strftime("%Y-%m-%d")
-    df = df[["Date", "Close"]].rename(columns={"Date": "date", "Close": "close"})
-    return df
-
-def main():
-    btc = download(TICKERS["btc"])
-    eth = download(TICKERS["eth"])
-
-    merged = pd.merge(btc, eth, on="date", suffixes=("_btc", "_eth"))
-    merged = merged.rename(columns={"close_btc": "btc_close", "close_eth": "eth_close"})
-
-    merged["btc_pct"] = (merged["btc_close"].pct_change() * 100).round(3).fillna(0)
-    merged["eth_pct"] = (merged["eth_close"].pct_change() * 100).round(3).fillna(0)
-
-    records = merged.to_dict(orient="records")
-
-    with open("data/prices.json", "w") as f:
-        json.dump(records, f, indent=2)
-
-    with open("data/table.json", "w") as f:
-        json.dump(records, f, indent=2)
-
-    meta = {
-        "updated_at_utc": datetime.utcnow().isoformat() + "Z",
-        "rows": len(records)
+def get_historical_prices(coin_id, days=60):
+    url = f"https://api.coingecko.com/api/v3/coins/{coin_id}/market_chart"
+    params = {
+        "vs_currency": "usd",
+        "days": days,
+        "interval": "daily"
     }
-    with open("data/meta.json", "w") as f:
-        json.dump(meta, f, indent=2)
+    r = requests.get(url, params=params, timeout=10)
+    r.raise_for_status()
+    data = r.json()
+    return data["prices"]
 
-if __name__ == "__main__":
-    main()
+# Récupérer BTC et ETH
+btc_data = get_historical_prices("bitcoin", 60)
+eth_data = get_historical_prices("ethereum", 60)
+
+# Créer DataFrame
+df = pd.DataFrame({
+    "Date": [datetime.fromtimestamp(ts/1000).strftime("%Y-%m-%d") for ts, _ in btc_data],
+    "BTC": [price for _, price in btc_data],
+    "ETH": [price for _, price in eth_data]
+})
+
+# Calcul % journalier
+df["BTC_pct"] = df["BTC"].pct_change().fillna(0) * 100
+df["ETH_pct"] = df["ETH"].pct_change().fillna(0) * 100
+df["BTC_pct"] = df["BTC_pct"].round(3)
+df["ETH_pct"] = df["ETH_pct"].round(3)
+
+# Convertir en JSON
+records = df.rename(columns={"Date": "date", "BTC": "btc_close", "ETH": "eth_close"}).to_dict(orient="records")
+for r in records:
+    r["btc_pct"] = r.pop("BTC_pct")
+    r["eth_pct"] = r.pop("ETH_pct")
+
+# Écrire dans les fichiers JSON
+with open("data/prices.json", "w") as f:
+    json.dump(records, f, indent=2)
+
+with open("data/table.json", "w") as f:
+    json.dump(records, f, indent=2)
+
+print("✅ prices.json et table.json mis à jour !")
