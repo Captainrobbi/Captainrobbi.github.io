@@ -26,32 +26,27 @@ function buildPlots(rows) {
   ], { title: "Variations journalières (%)" });
 }
 
-function buildTable(rows) {
-  const tbody = document.querySelector("#cryptoTable tbody");
-
-  // Vider le tbody avant de reconstruire
+function buildTable(rows, tableId = "#cryptoTable") {
+  const tbody = document.querySelector(`${tableId} tbody`);
   tbody.innerHTML = "";
 
-  // Ajouter les lignes
   rows.slice().reverse().forEach(r => {
     tbody.innerHTML += `
       <tr>
         <td>${r.date}</td>
-        <td>${formatNumber(r.btc_close)}</td>
-        <td>${formatNumber(r.eth_close)}</td>
-        <td>${formatNumber(r.btc_pct)}%</td>
-        <td>${formatNumber(r.eth_pct)}%</td>
+        <td>${formatNumber(r.btc_close ?? r.btc_pred)}</td>
+        <td>${formatNumber(r.eth_close ?? r.eth_pred)}</td>
+        <td>${r.btc_pct !== undefined ? formatNumber(r.btc_pct) + "%" : ""}</td>
+        <td>${r.eth_pct !== undefined ? formatNumber(r.eth_pct) + "%" : ""}</td>
       </tr>
     `;
   });
 
-  // Détruire la DataTable existante si elle existe
-  if ($.fn.DataTable.isDataTable("#cryptoTable")) {
-    $("#cryptoTable").DataTable().clear().destroy();
+  if ($.fn.DataTable.isDataTable(tableId)) {
+    $(tableId).DataTable().clear().destroy();
   }
 
-  // Créer la DataTable
-  new DataTable("#cryptoTable", {
+  new DataTable(tableId, {
     pageLength: 25,
     order: [[0, "desc"]]
   });
@@ -69,6 +64,9 @@ async function buildPredictions() {
     { x: dates, y: btc, type: "scatter", mode: "lines+markers", name: "BTC prédiction" },
     { x: dates, y: eth, type: "scatter", mode: "lines+markers", name: "ETH prédiction" }
   ], { title: "Prédictions BTC & ETH" });
+
+  // Mise à jour de la table de prédictions
+  buildTable(rows, "#predictionTable");
 }
 
 // -------------------------
@@ -77,6 +75,6 @@ async function buildPredictions() {
 (async function main() {
   const rows = await loadData();
   buildPlots(rows);
-  buildTable(rows);
-  buildPredictions();
+  buildTable(rows); // Table historique
+  await buildPredictions(); // Table de prédictions + plot
 })();
