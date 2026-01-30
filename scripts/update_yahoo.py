@@ -52,11 +52,11 @@ from datetime import datetime, timedelta
 
 
 # Prédictions:
-days_to_predict = 10
+days_to_predict = 30
 
 def predict_next_days(series, n_days):
-    # prend les 5 derniers jours pour calculer la tendance moyenne
-    trend = series.diff().tail(5).mean()
+   
+    trend = series.diff().tail(50).mean()
     last_value = series.iloc[-1]
     predictions = []
     for i in range(n_days):
