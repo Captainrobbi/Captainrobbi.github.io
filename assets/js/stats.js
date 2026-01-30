@@ -52,3 +52,25 @@ function buildTable(rows) {
   buildPlots(rows);
   buildTable(rows);
 })();
+
+async function buildPredictions() {
+  const res = await fetch("data/predictions.json");
+  const rows = await res.json();
+
+  const dates = rows.map(r => r.date);
+  const btc = rows.map(r => r.btc_pred);
+  const eth = rows.map(r => r.eth_pred);
+
+  Plotly.newPlot("predictionPlot", [
+    { x: dates, y: btc, type: "scatter", mode: "lines+markers", name: "BTC prédiction" },
+    { x: dates, y: eth, type: "scatter", mode: "lines+markers", name: "ETH prédiction" }
+  ], { title: "Prédictions BTC & ETH" });
+}
+
+(async function main() {
+  const rows = await loadData();
+  buildPlots(rows);
+  buildTable(rows);
+  buildPredictions(); 
+})();
+
