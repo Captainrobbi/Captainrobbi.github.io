@@ -3,7 +3,7 @@ import pandas as pd
 from datetime import datetime
 import json
 
-def get_historical_prices(coin_id, days=60):
+def get_historical_prices(coin_id, days=3600):
     url = f"https://api.coingecko.com/api/v3/coins/{coin_id}/market_chart"
     params = {
         "vs_currency": "usd",
