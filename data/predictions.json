@@ -1,152 +1,152 @@
 [
   {
     "date": "2026-03-11",
-    "btc_pred": 69798.91,
-    "eth_pred": 2041.52
+    "btc_pred": 70673.34,
+    "eth_pred": 2054.07
   },
   {
     "date": "2026-03-12",
-    "btc_pred": 69686.63,
-    "eth_pred": 2039.66
+    "btc_pred": 70563.97,
+    "eth_pred": 2052.25
   },
   {
     "date": "2026-03-13",
-    "btc_pred": 69574.35,
-    "eth_pred": 2037.79
+    "btc_pred": 70454.6,
+    "eth_pred": 2050.42
   },
   {
     "date": "2026-03-14",
-    "btc_pred": 69462.08,
-    "eth_pred": 2035.92
+    "btc_pred": 70345.22,
+    "eth_pred": 2048.6
   },
   {
     "date": "2026-03-15",
-    "btc_pred": 69349.8,
-    "eth_pred": 2034.05
+    "btc_pred": 70235.85,
+    "eth_pred": 2046.77
   },
   {
     "date": "2026-03-16",
-    "btc_pred": 69237.52,
-    "eth_pred": 2032.19
+    "btc_pred": 70126.48,
+    "eth_pred": 2044.94
   },
   {
     "date": "2026-03-17",
-    "btc_pred": 69125.24,
-    "eth_pred": 2030.32
+    "btc_pred": 70017.11,
+    "eth_pred": 2043.12
   },
   {
     "date": "2026-03-18",
-    "btc_pred": 69012.97,
-    "eth_pred": 2028.45
+    "btc_pred": 69907.73,
+    "eth_pred": 2041.29
   },
   {
     "date": "2026-03-19",
-    "btc_pred": 68900.69,
-    "eth_pred": 2026.58
+    "btc_pred": 69798.36,
+    "eth_pred": 2039.47
   },
   {
     "date": "2026-03-20",
-    "btc_pred": 68788.41,
-    "eth_pred": 2024.71
+    "btc_pred": 69688.99,
+    "eth_pred": 2037.64
   },
   {
     "date": "2026-03-21",
-    "btc_pred": 68676.13,
-    "eth_pred": 2022.85
+    "btc_pred": 69579.62,
+    "eth_pred": 2035.81
   },
   {
     "date": "2026-03-22",
-    "btc_pred": 68563.86,
-    "eth_pred": 2020.98
+    "btc_pred": 69470.24,
+    "eth_pred": 2033.99
   },
   {
     "date": "2026-03-23",
-    "btc_pred": 68451.58,
-    "eth_pred": 2019.11
+    "btc_pred": 69360.87,
+    "eth_pred": 2032.16
   },
   {
     "date": "2026-03-24",
-    "btc_pred": 68339.3,
-    "eth_pred": 2017.24
+    "btc_pred": 69251.5,
+    "eth_pred": 2030.34
   },
   {
     "date": "2026-03-25",
-    "btc_pred": 68227.02,
-    "eth_pred": 2015.38
+    "btc_pred": 69142.13,
+    "eth_pred": 2028.51
   },
   {
     "date": "2026-03-26",
-    "btc_pred": 68114.75,
-    "eth_pred": 2013.51
+    "btc_pred": 69032.75,
+    "eth_pred": 2026.68
   },
   {
     "date": "2026-03-27",
-    "btc_pred": 68002.47,
-    "eth_pred": 2011.64
+    "btc_pred": 68923.38,
+    "eth_pred": 2024.86
   },
   {
     "date": "2026-03-28",
-    "btc_pred": 67890.19,
-    "eth_pred": 2009.77
+    "btc_pred": 68814.01,
+    "eth_pred": 2023.03
   },
   {
     "date": "2026-03-29",
-    "btc_pred": 67777.91,
-    "eth_pred": 2007.9
+    "btc_pred": 68704.64,
+    "eth_pred": 2021.2
   },
   {
     "date": "2026-03-30",
-    "btc_pred": 67665.64,
-    "eth_pred": 2006.04
+    "btc_pred": 68595.27,
+    "eth_pred": 2019.38
   },
   {
     "date": "2026-03-31",
-    "btc_pred": 67553.36,
-    "eth_pred": 2004.17
+    "btc_pred": 68485.89,
+    "eth_pred": 2017.55
   },
   {
     "date": "2026-04-01",
-    "btc_pred": 67441.08,
-    "eth_pred": 2002.3
+    "btc_pred": 68376.52,
+    "eth_pred": 2015.73
   },
   {
     "date": "2026-04-02",
-    "btc_pred": 67328.8,
-    "eth_pred": 2000.43
+    "btc_pred": 68267.15,
+    "eth_pred": 2013.9
   },
   {
     "date": "2026-04-03",
-    "btc_pred": 67216.53,
-    "eth_pred": 1998.57
+    "btc_pred": 68157.78,
+    "eth_pred": 2012.07
   },
   {
     "date": "2026-04-04",
-    "btc_pred": 67104.25,
-    "eth_pred": 1996.7
+    "btc_pred": 68048.4,
+    "eth_pred": 2010.25
   },
   {
     "date": "2026-04-05",
-    "btc_pred": 66991.97,
-    "eth_pred": 1994.83
+    "btc_pred": 67939.03,
+    "eth_pred": 2008.42
   },
   {
     "date": "2026-04-06",
-    "btc_pred": 66879.69,
-    "eth_pred": 1992.96
+    "btc_pred": 67829.66,
+    "eth_pred": 2006.6
   },
   {
     "date": "2026-04-07",
-    "btc_pred": 66767.42,
-    "eth_pred": 1991.09
+    "btc_pred": 67720.29,
+    "eth_pred": 2004.77
   },
   {
     "date": "2026-04-08",
-    "btc_pred": 66655.14,
-    "eth_pred": 1989.23
+    "btc_pred": 67610.91,
+    "eth_pred": 2002.94
   },
   {
     "date": "2026-04-09",
-    "btc_pred": 66542.86,
-    "eth_pred": 1987.36
+    "btc_pred": 67501.54,
+    "eth_pred": 2001.12
   }
 ]
